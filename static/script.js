@@ -1,46 +1,101 @@
-async function sendDownload(type) {
+async function downloadMedia(mode) {
 
     const url = document.getElementById("url").value;
-    const status = document.getElementById("status");
+
+    const terminal =
+        document.getElementById("terminal");
 
     if (!url) {
-        status.innerHTML = "ENTER URL";
+
+        terminal.innerHTML =
+            "Please enter TikTok URL";
+
         return;
     }
 
-    status.innerHTML = "PROCESSING...";
+    // LOADING STEPS
 
-    const response = await fetch("/download", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            url: url,
-            type: type
-        })
-    });
+    const steps = [
 
-    const data = await response.json();
+        "Processing request...",
 
-    if (data.status === "success") {
+        "Scanning TikTok URL...",
 
-        status.innerHTML = "DOWNLOAD READY";
+        "Extracting media...",
 
-        window.location.href =
-            `/file?path=${data.file}`;
+        "Preparing download...",
 
-    } else {
+        "Finalizing..."
 
-        status.innerHTML =
-            "ERROR: " + data.message;
+    ];
+
+    let current = 0;
+
+    terminal.innerHTML = steps[0];
+
+    const animation = setInterval(() => {
+
+        current++;
+
+        if (current < steps.length) {
+
+            terminal.innerHTML =
+                steps[current];
+        }
+
+    }, 800);
+
+    try {
+
+        const response = await fetch("/download", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                url: url,
+                mode: mode
+
+            })
+
+        });
+
+        const data = await response.json();
+
+        clearInterval(animation);
+
+        // SUCCESS
+
+        if (data.status === "success") {
+
+            terminal.innerHTML =
+                "Download ready ✔";
+
+            window.location.href =
+                "/file?path=" +
+                encodeURIComponent(data.file);
+
+        }
+
+        // ERROR
+
+        else {
+
+            terminal.innerHTML =
+                data.message;
+        }
+
     }
-}
 
-function downloadVideo() {
-    sendDownload("video");
-}
+    catch (error) {
 
-function downloadAudio() {
-    sendDownload("audio");
+        clearInterval(animation);
+
+        terminal.innerHTML =
+            "Unexpected server error";
+    }
 }
