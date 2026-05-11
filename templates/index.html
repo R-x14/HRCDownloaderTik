@@ -1,108 +1,197 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VOID.SYS</title>
+<title>Horec Store Downloader</title>
 
-<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 <body>
 
-<div class="lines">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
+<!-- BACKGROUND -->
 
-<div class="nav">
+<div class="grid-bg"></div>
 
-    <div class="logo">
-        VOID<span>.SYS</span>
-    </div>
+<!-- HEADER -->
+
+<header>
 
     <div class="status">
-        <div class="dot"></div>
+
+        <div class="status-dot"></div>
+
         SYSTEM ONLINE
+
     </div>
 
-</div>
+    <a href="https://horecstore.com"
+       target="_blank"
+       class="brand">
 
-<div class="main">
+        <span class="icon">
+            &lt;/&gt;
+        </span>
 
-    <div class="terminal">
+        Horec Store
 
-        <div class="top">
+    </a>
 
-            <div class="left-top">
+</header>
 
-                <div class="circle red"></div>
-                <div class="circle yellow"></div>
-                <div class="circle green"></div>
+<!-- MAIN -->
 
-            </div>
+<div class="container">
 
-            <div class="path">
-                root@void:/tiktok/downloader
-            </div>
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="execute">
+            EXECUTE TIKTOK_DOWNLOADER >
+        </div>
+
+        <h1>
+            TIKTOK
+            <span>DOWNLOADER</span>
+        </h1>
+
+        <p class="desc">
+            Download TikTok videos without watermark.
+        </p>
+
+        <div class="warning">
+
+            استخدام وتحميل المقاطع مسؤوليتك فانتبه وقوم بتحميل المقاطع المناسبة،
+            تحميل المقاطع الغير مناسبة مسؤوليتك وعلى ذمتك 🫶🏼
+
+            <br><br>
+
+            Downloading and using videos is your responsibility.
+            Please only download appropriate content.
 
         </div>
 
-        <div class="content">
+    </div>
 
-            <div class="command">
-                > EXECUTE <span>TIKTOK_DOWNLOADER</span>
+    <!-- DOWNLOAD BOX -->
+
+    <div class="download-box">
+
+        <input
+            type="text"
+            id="url"
+            placeholder="https://www.tiktok.com/..."
+        >
+
+        <div class="buttons">
+
+            <button onclick="downloadMedia('audio')">
+
+                EXTRACT AUDIO MP3
+
+            </button>
+
+            <button onclick="downloadMedia('video')">
+
+                DOWNLOAD VIDEO
+
+            </button>
+
+        </div>
+
+        <!-- TERMINAL -->
+
+        <div class="terminal" id="terminal">
+
+            Waiting for command...
+
+        </div>
+
+    </div>
+
+    <!-- INFO CARDS -->
+
+    <div class="cards">
+
+        <!-- DEV -->
+
+        <div class="card">
+
+            <div class="emoji">
+                👨‍💻
             </div>
 
-            <h1 class="title">
-                TIKTOK
-                <span>DOWNLOADER</span>
-            </h1>
+            <h3>
+                Developer
+            </h3>
 
-            <p class="desc">
-                Download TikTok videos without watermark.
+            <p>
+                Developed By Horec Store
             </p>
 
-            <div class="box">
+        </div>
 
-                <div class="input-wrap">
+        <!-- TELEGRAM -->
 
-                    <div class="prefix">
-                        URL >
-                    </div>
+        <a href="https://t.me/horecstore"
+           target="_blank"
+           class="card">
 
-                    <input
-                        type="text"
-                        class="input"
-                        id="url"
-                        placeholder="https://www.tiktok.com/..."
-                    >
-
-                </div>
-
-                <div class="buttons">
-
-                    <button class="btn" onclick="downloadVideo()">
-                        DOWNLOAD VIDEO
-                    </button>
-
-                    <button class="btn" onclick="downloadAudio()">
-                        EXTRACT AUDIO
-                    </button>
-
-                </div>
-
+            <div class="emoji">
+                📡
             </div>
 
-            <div id="status"></div>
+            <h3>
+                Telegram
+            </h3>
+
+            <p>
+                @horecstore
+            </p>
+
+        </a>
+
+        <!-- STORE -->
+
+        <a href="https://horecstore.com"
+           target="_blank"
+           class="card">
+
+            <div class="emoji">
+                🛒
+            </div>
+
+            <h3>
+                Store
+            </h3>
+
+            <p>
+                horecstore.com
+            </p>
+
+        </a>
+
+        <!-- SOON -->
+
+        <div class="card">
+
+            <div class="emoji">
+                🚀
+            </div>
+
+            <h3>
+                Soon
+            </h3>
+
+            <p>
+                More platforms coming soon...
+            </p>
 
         </div>
 
@@ -110,7 +199,7 @@
 
 </div>
 
-<script src="/static/script.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
